@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FUND2.Models
 {
-    public class Posts
+    public class Posts :Irrequestable
     {
         public int userId { get; set; }
         public int id { get; set; }

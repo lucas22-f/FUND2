@@ -108,7 +108,7 @@ namespace FUND2 {
 
             //-------------------Solicitudes a Servicios Web por HTTP GET ----------------
 
-
+            //GET
             //string url = "https://jsonplaceholder.typicode.com/posts";
 
             //HttpClient client = new HttpClient();
@@ -127,7 +127,7 @@ namespace FUND2 {
 
             //----------------Solicitudes a Servicios web por HTTP POST, PUT, DELETE--------------------------
 
-
+            //POST
 
             //string url = "https://jsonplaceholder.typicode.com/posts";
             //var client = new HttpClient();
@@ -175,7 +175,32 @@ namespace FUND2 {
 
             //}
 
-            //  DELETE
+            //  DELETE en este caso hacemos todas las lineas correspondientes sin mandar un objeto al endpoint ya que termina con el mismo;
+            //string url = "https://jsonplaceholder.typicode.com/posts/22";
+            //var client = new HttpClient();
+            //var httpResponse = await client.DeleteAsync(url);
+            //var result = await httpResponse.Content.ReadAsStringAsync();
+            //var resDelete = httpResponse.StatusCode;
+            //Console.WriteLine(resDelete);
+
+
+            //---------GENERICS-------------
+            //le decimos generics para indicar a la clase con que tipo de objeto trabajar-
+
+
+            var cerveza = new Cerveza(500, "xd2") { Alcohol = 5, Marca = "xd"};
+            Services.SendRequest<Cerveza> ser = new Services.SendRequest<Cerveza>();
+            var rta = await ser.Send(cerveza);
+            Console.WriteLine(rta.id);
+
+            var miPost = new Posts() { body = "Hola", title = "quetal", userId = 50 };
+
+            Services.SendRequest<Posts> servicio2 = new Services.SendRequest<Posts>();
+            var rta2 = await servicio2.Send(miPost);
+            Console.WriteLine(rta2.userId+rta2.title+rta2.body);
+
+       
+           
 
 
 
