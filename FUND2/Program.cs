@@ -3,6 +3,8 @@ using FUND2.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Linq;
+using FUND2.Errors;
 
 
 
@@ -188,21 +190,132 @@ namespace FUND2 {
             //le decimos generics para indicar a la clase con que tipo de objeto trabajar-
 
 
-            var cerveza = new Cerveza(500, "xd2") { Alcohol = 5, Marca = "xd"};
-            Services.SendRequest<Cerveza> ser = new Services.SendRequest<Cerveza>();
-            var rta = await ser.Send(cerveza);
-            Console.WriteLine(rta.id);
+            //var cerveza = new Cerveza(500, "xd2") { Alcohol = 5, Marca = "xd"};
+            //Services.SendRequest<Cerveza> ser = new Services.SendRequest<Cerveza>();
+            //var rta = await ser.Send(cerveza);
+            //Console.WriteLine(rta.id);
 
-            var miPost = new Posts() { body = "Hola", title = "quetal", userId = 50 };
+            //var miPost = new Posts() { body = "Hola", title = "quetal", userId = 50 };
 
-            Services.SendRequest<Posts> servicio2 = new Services.SendRequest<Posts>();
-            var rta2 = await servicio2.Send(miPost);
-            Console.WriteLine(rta2.userId+rta2.title+rta2.body);
+            //Services.SendRequest<Posts> servicio2 = new Services.SendRequest<Posts>();
+            //var rta2 = await servicio2.Send(miPost);
+            //Console.WriteLine(rta2.userId+rta2.title+rta2.body);
 
-       
+
+            //------ LINQ lo utilizamos para realizar consultas a colecciones!  ya sea de la base de datos o de archivos xml arreglos listas etc
+
+            //List<int> numeros = new List<int>() { 67,1, 2, 3, 4, 5, 6, 7, 8 };
+
+            //var n = numeros.Where(x => x == 10).FirstOrDefault();
+            //Console.WriteLine(n);
+
+            //var orderN = numeros.OrderBy(x => x);
+            //var total = numeros.Average(x => x);
+            //foreach (var numer in orderN)
+            //{
+            //    Console.WriteLine(numer);
+            //}
+
+            //Console.WriteLine(total);
+
+
+
+            //-------------PRACTICA CON LINQ---------------------------------
+            //var cervezasOrdenadas = from d in cervezas
+            //                        where d.Nombre == "Raul"
+            //                        orderby d.Nombre 
+            //                        select d;
+
+            //foreach(var cerveza in cervezasOrdenadas)
+            //{
+            //    Console.WriteLine(cerveza.Nombre+" , "+cerveza.Marca);
+            //}
+            //---------------------------------------------------------------
+
+            //List<Bar> bares = new List<Bar>()
+            //{
+            //    new Bar("Maddle")
+            //    {
+            //        ListaCerveza = new List<Cerveza>()
+            //        {
+            //            new Cerveza(20,"Carlos"){Alcohol=2,Marca="alejandro"},
+            //            new Cerveza(2,"Raul"){Alcohol=5,Marca="zac"},
+            //            new Cerveza(34,"Erne"){Alcohol=16,Marca="bravo"},
+            //        }
+            //    },
+
+            //    new Bar("Lucas")
+            //    {
+            //        ListaCerveza=new List<Cerveza>()
+            //        {
+
+            //            new Cerveza(13,"De otra marca"){Alcohol=5,Marca="dea"},
+            //            new Cerveza(349,"La mejor"){Alcohol=2,Marca="Deuna"},
+            //        }
+            //    },
+
+            //    new Bar("Elvacio")
+
+            //};
+
+            //var bar = (from d in bares
+            //          where d.ListaCerveza.Where(c => c.Nombre == "La mejor").Count() > 0
+            //          select new BarData(d.Nombre)
+            //          { 
+
+            //              bebidas = (
+
+            //              from c in d.ListaCerveza
+            //              select new Bebida(c.Nombre,c.Cantidad)
+
+            //              ).ToList()
+            //           }
+
+            //          ).ToList();
+
+            //foreach (var a in bar)
+            //{
+            //    Console.WriteLine(a.Nombre);
+            //}
+
+
+
+            //List < Cerveza > cervezas = new List<Cerveza>()
+            //{
+            //    new Cerveza(20,"Carlos"){Alcohol=2,Marca="alejandro"},
+            //    new Cerveza(2,"Raul"){Alcohol=5,Marca="zac"},
+            //    new Cerveza(34,"Erne"){Alcohol=16,Marca="bravo"},
+            //    new Cerveza(13,"Ariel"){Alcohol=34,Marca="delta"},
+
+            //};
+
+            //--------------------------------EXEPCIONES--------------------------------
+
+
+            try
+            {
+               var searcherBeer = new Services.SearcherBeer();
+                var cantidad = searcherBeer.GetCantidad("saadasd");
+                Console.WriteLine("OK");
+
+
+            }
+            catch (NotFoundBeerException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
+            finally
+            {
+                Console.WriteLine("esto siempre se ejecuta");
+            }
+
            
-
-
+            
 
 
             //de interfaces

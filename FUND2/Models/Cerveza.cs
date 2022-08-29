@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FUND2.Models
 {
-    internal class Cerveza : Bebida , IBebidaAlcoholica,Irrequestable
+    public class Cerveza : Bebida , IBebidaAlcoholica,Irrequestable
     {
         //SOlucion poner el mismo atributo de la interfaz en la Clase;
         public int Alcohol { get; set; }
