@@ -8,9 +8,20 @@ using FUND2.Errors;
 
 
 
-namespace FUND2 { 
-    class Program
+namespace FUND2 {
+
+
+     static class Program
     {
+
+        public class Beer
+        {
+            public string Name { get; set; }
+            public int Alcohol { get; set; }
+        }
+
+
+
         //-------------------Solicitudes a Servicios Web por HTTP GET ------
 
         static async Task Main(string[] args)
@@ -292,39 +303,98 @@ namespace FUND2 {
             //--------------------------------EXEPCIONES--------------------------------
 
 
-            try
-            {
-               var searcherBeer = new Services.SearcherBeer();
-                var cantidad = searcherBeer.GetCantidad("saadasd");
-                Console.WriteLine("OK");
-
-
-            }
-            catch (NotFoundBeerException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            
-            finally
-            {
-                Console.WriteLine("esto siempre se ejecuta");
-            }
-
-           
-            
-
-
-            //de interfaces
-            //static void MostrarRecomendacion(IBebidaAlcoholica bebida)
+            //try
             //{
-            //    bebida.MaximoRecomendado();
+            //   var searcherBeer = new Services.SearcherBeer();
+            //    var cantidad = searcherBeer.GetCantidad("saadasd");
+            //    Console.WriteLine("OK");
+
+
             //}
+            //catch (NotFoundBeerException ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
+
+            //finally
+            //{
+            //    Console.WriteLine("esto siempre se ejecuta");
+            //}
+
+
+            //---------------------------------Delegados---------------------------------
+
+            //es un tipo que va a almacenar una firma
+            //una funcion que reciba otra funcion interna que se ejecute
+            //cuando queramos.
+
+            //    Action<string, string> mostrar = (a,b)=>Console.WriteLine(a+b);
+            //    HacerAlgo(mostrar);
+
+            //    //de interfaces
+            //    //static void MostrarRecomendacion(IBebidaAlcoholica bebida)
+            //    //{
+            //    //    bebida.MaximoRecomendado();
+            //    //}
+            //}
+            //public static void HacerAlgo(Action<string,string> funcionFinal)
+            //{
+            //    Console.WriteLine("hago algo");
+            //    funcionFinal("se envio desde otra funcion ","otra");
+            //    Console.WriteLine("Hago algo mas");
+            //}
+
+            //public static void Show(string cad,string cad2)
+            //{
+            //    Console.WriteLine(cad+cad2);
+            //}
+            //public static int Show(string cad)
+            //{
+            //    return cad.Count();
+            //}
+
+
+            //---------------PREDICATE------------------
+            //implementacion de los delegados se parece!;
+            //ahorras estar desarrollando diferentes tipos
+            //hace una sentencia que devuelve true o false;
+
+
+            //var numbers = new List<int>{ 1,2,3,4,5,6,7,8,9,10};
+
+            //var predicate = new Predicate<int>(x=> x%2==0);
+            //Predicate<int> negative = x => !predicate(x);
+
+            //var dividers2 = numbers.FindAll(negative);
+
+            //dividers2.ForEach(d => { Console.WriteLine(d); });
+
+            //var beers = new List<Beer>()
+            //{
+            //    new Beer(){Name ="Ipa", Alcohol = 8},
+            //    new Beer(){Name ="Pale Ale",Alcohol = 5},
+            //    new Beer(){Name = "Stout",Alcohol=23},
+            //    new Beer() {Name ="Tripel",Alcohol = 34},
+            //};
+
+
+            //beers.ShowBeerThatIGetDrunk(x => x.Alcohol >= 8);
+
+
+            
+
+
         }
+
+       //public static bool IsDivider2(int x) => x % 2 == 0;
+       //static void ShowBeerThatIGetDrunk(this List<Beer> beers, Predicate<Beer> condition)
+       // {
+       //     var evilBeers = beers.FindAll(condition);
+       //     evilBeers.ForEach(d => { Console.WriteLine(d.Name); });
+       // }
     }
-
-
 }
